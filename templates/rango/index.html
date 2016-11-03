@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+
+    <head>
+        <title>Rango</title>
+        <link rel="stylesheet" href="{% static "css/base.css" %}" /> <!-- CSS -->
+        <script src="{% static "js/jquery.js" %}"></script> <!-- JavaScript -->
+    </head>
+
+    <body>
+        <h1>Rango says: Hello World!</h1>
+        <h2>Top 5 Categories</h2>
+        {% if categories %}
+            <ul>
+                {% for category in categories %}
+                <!-- Following line changed to add an HTML hyperlink -->
+                <li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There is no categories at present.</strong>
+        {% endif %}
+        <a href="/rango/add_category/">Add a New Category</a><br />
+
+        <h2>Top 5 most views pages</h2>
+        {% if pages %}
+            <ul>
+                {% for page in pages %}
+                <li><a href="{{ page.url }}">{{ page.title }}</a>-{{ page.category }}({{ page.views }}view(s))</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There is no pages at present.</strong>
+        {% endif %}
+        <a href="/rango/about/">About</a>
+    </body>
+
+
+</html>
